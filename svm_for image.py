@@ -20,7 +20,7 @@ def create_dataset(training_df,image_dir):
     images=[]
     labels=[]
 
-    for index, row in tqdm(training_df.iterows(),total=len(training_df)desc='processing image'):
+    for index, row in tqdm(training_df.iterows(),total=len(training_df),desc='processing image'):
         #get image id 
         image_id= training_df['ImageId']
         #join path of image 
@@ -74,7 +74,7 @@ if __name__ == '__main__':
         test_df=df[df.kfold==fold_].reset_index(drop=True)
 
         #now create a train dataset 
-        xtrain,y_train=create_dataset(train_df,image_path)
+        xtrain,ytrain=create_dataset(train_df,image_path)
 
         #now create the dataset 
 
@@ -82,7 +82,7 @@ if __name__ == '__main__':
 
         #fit the random forest algo and fit the model 
 
-        model=ensemble.RandomForestClassifier(n_jobs=-1)
+        clf=ensemble.RandomForestClassifier(n_jobs=-1)
         clf.fit(xtrain,ytrain)
 
 
